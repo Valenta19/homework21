@@ -77,5 +77,25 @@ return (long) temperature12.getTemperature();
 
         Supplier<Integer> random = () -> new Random().nextInt(100);
         System.out.println(random.get());
+
+        System.out.println("Задиние 5");
+List<Person> personList =  Arrays.asList(
+        new Person(12, "Михаил"),
+        new Person(14, "Мария"),
+        new Person(1, "Андрей")
+);
+Predicate<Person> condition = (Person person) -> person.getVision() > 2;
+Function<Person, Integer> ifTrue = (Person person) -> person.getVision();
+Function<Person, Integer> ifFalse = (Person person) -> 0;
+Function<Person, Integer> integerFunction = ternaryOperator(condition, ifTrue, ifFalse);
+        for (Person sum : personList) {
+            System.out.println(integerFunction.apply(sum));
+        }
+    }
+    public static <T, U> Function<T, U> ternaryOperator(
+            Predicate<? super T> condition,
+            Function<? super T, ? extends U> ifTrue,
+            Function<? super T, ? extends U> ifFalse) {
+   return t -> condition.test(t) ? ifTrue.apply(t) : ifFalse.apply(t);
     }
 }
